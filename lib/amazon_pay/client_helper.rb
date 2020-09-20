@@ -133,7 +133,7 @@ module AmazonPay
       headers['accept'] = 'application/json'
       headers[
         'user-agent'
-      ] = "amazon-pay-api-sdk-ruby/#{AmazonPay::CONSTANTS[:SDK_VERSION]} (RB/#{RUBY_VERSION}; #{RUBY_PLATFORM})"
+      ] = "amazon-pay-api-sdk-ruby/#{AmazonPay::CONSTANTS[:SDK_VERSION]} (Ruby/#{RUBY_VERSION}; #{RUBY_PLATFORM})"
 
       lower_case_sorted_header_keys = headers.keys.sort.map(&:downcase)
       signed_headers = lower_case_sorted_header_keys.join(';')
@@ -146,7 +146,7 @@ module AmazonPay
       end
 
       canonical_request =
-        options[:method] + "\n/" +
+        options[:method] + "\n" +
         options[:url_fragment] + "\n" +
         fetch_parameters_as_string(request_params: options[:query_params]) +
         "\n"
