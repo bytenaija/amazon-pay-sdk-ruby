@@ -60,7 +60,7 @@ To associate the key with your account, follow the instructions here to
         'private_key': File.read(File.expand_path('tst/private.pem', __dir__)), # Path to RSA Private Key (or a string representation)
         'region': 'us',                                                         # Must be one of: 'us', 'eu', 'jp'
         'sandbox': true                                                         # true (Sandbox) or false (Production) boolean
-    };
+    }
 ```
 
 # Versioning
@@ -80,13 +80,13 @@ In the event of request throttling, the HTTPS call will be attempted up to three
 
 Please note that your merchant account must be whitelisted to use the [Delivery Trackers API](https://developer.amazon.com/docs/amazon-pay-onetime/delivery-order-notifications.html).
 
-- **deliveryTrackers**(payload: nil, headers: nil) &#8594; POST to `#{version}/deliveryTrackers`
+- **delivery_trackers**(payload: nil, headers: nil) &#8594 POST to `#{version}/delivery_trackers`
 
 ## Authorization Tokens API
 
 Please note that your solution provider account must have a pre-existing relationship (valid and active MWS authorization token) with the merchant account in order to use this function.
 
-- **getAuthorizationToken**(mws_auth_token: nil, merchant_id: nil, headers: nil) &#8594; GET to `#{version}/authorizationTokens#{mws_auth_token}?merchantId=#{merchant_id}`
+- **getAuthorizationToken**(mws_auth_token: nil, merchant_id: nil, headers: nil) &#8594 GET to `#{version}/authorizationTokens#{mws_auth_token}?merchantId=#{merchant_id}`
 
 ## Amazon Checkout v2 API
 
@@ -97,45 +97,45 @@ The headers field is not optional for create/POST calls below because it require
 ```ruby
    headers = {
         'x-amz-pay-idempotency-key': SecureRandom.uuid.to_s.gsub(/-/, '')
-    };
+    }
 ```
 
 ### Amazon Checkout v2 Buyer object
 
-- **getBuyer**(buyer_token: nil, headers: nil) &#8594; GET to `#{version}/buyer/{$buyerToken}`
+- **getBuyer**(buyer_token: nil, headers: nil) &#8594 GET to `#{version}/buyer/{$buyerToken}`
 
 ### Checkout v2 CheckoutSession object
 
-- **createCheckoutSession**(payload: nil, headers: nil) &#8594; POST to `#{version}/checkoutSessions`
-- **getCheckoutSession**(checkout_session_id: nil, headers: nil) &#8594; GET to `#{version}/checkoutSessions/#{checkout_session_id}`
-- **updateCheckoutSession**(checkout_session_id: nil, payload: nil, headers: nil) &#8594; PATCH to `#{version}/checkoutSessions#{checkout_session_id}`
-- **completeCheckoutSession**(checkout_session_id: nil, payload: nil, headers: nil) &#8594; POST to `#{version}/checkoutSessions#{checkout_session_id}/complete`
+- **createCheckoutSession**(payload: nil, headers: nil) &#8594 POST to `#{version}/checkoutSessions`
+- **getCheckoutSession**(checkout_session_id: nil, headers: nil) &#8594 GET to `#{version}/checkoutSessions/#{checkout_session_id}`
+- **updateCheckoutSession**(checkout_session_id: nil, payload: nil, headers: nil) &#8594 PATCH to `#{version}/checkoutSessions#{checkout_session_id}`
+- **completeCheckoutSession**(checkout_session_id: nil, payload: nil, headers: nil) &#8594 POST to `#{version}/checkoutSessions#{checkout_session_id}/complete`
 
 ### Checkout v2 ChargePermission object
 
-- **getChargePermission**(charge_permission_id: nil, headers: nil) &#8594; GET to `#{version}/chargePermissions/#{charge_permission_id}`
-- **updateChargePermission**(charge_permission_id: nil, payload: nil, headers: nil) &#8594; PATCH to `#{version}/chargePermissions#{charge_permission_id}`
-- **closeChargePermission**(charge_permission_id: nil, payload: nil, headers: nil) &#8594; DELETE to `#{version}/chargePermissions#{charge_permission_id}/close`
+- **getChargePermission**(charge_permission_id: nil, headers: nil) &#8594 GET to `#{version}/chargePermissions/#{charge_permission_id}`
+- **updateChargePermission**(charge_permission_id: nil, payload: nil, headers: nil) &#8594 PATCH to `#{version}/chargePermissions#{charge_permission_id}`
+- **closeChargePermission**(charge_permission_id: nil, payload: nil, headers: nil) &#8594 DELETE to `#{version}/chargePermissions#{charge_permission_id}/close`
 
 ### Checkout v2 Charge object
 
-- **createCharge**(payload, headers) &#8594; POST to `#{version}/charges`
-- **getCharge**(chargeId, headers: nil) &#8594; GET to `#{version}/charges/#{chargeId}`
-- **captureCharge**(chargeId, payload, headers) &#8594; POST to `#{version}/charges/#{chargeId}/capture`
-- **cancelCharge**(chargeId, payload, headers: nil) &#8594; DELETE to `#{version}/charges/#{chargeId}/cancel`
+- **createCharge**(payload: nil, headers: nil) &#8594 POST to `#{version}/charges`
+- **getCharge**(charge_id: nil, headers: nil) &#8594 GET to `#{version}/charges/#{charge_id}`
+- **capture_charge**(charge_id: nil, payload: nil, headers: nil) &#8594 POST to `#{version}/charges/#{charge_id}/capture`
+- **cancelCharge**(charge_id: nil, payload: nil, headers: nil) &#8594 DELETE to `#{version}/charges/#{charge_id}/cancel`
 
 ### Checkout v2 Refund object
 
-- **createRefund**(payload, headers) &#8594; POST to `#{version}/refunds`
-- **getRefund**(refundId, headers: nil) &#8594; GET to `#{version}/refunds/#{refundId}`
+- **createRefund**(payload: nil, headers: nil) &#8594 POST to `#{version}/refunds`
+- **getRefund**(refund_id: nil, headers: nil) &#8594 GET to `#{version}/refunds/#{refund_id}`
 
 ## In-Store API
 
 Please contact your Amazon Pay Account Manager before using the In-Store API calls in a Production environment to obtain a copy of the In-Store Integration Guide.
 
-- **instoreMerchantScan**(payload, headers: nil) &#8594; POST to `#{version}/in-store/merchantScan`
-- **instoreCharge**(payload, headers: nil) &#8594; POST to `#{version}/in-store/charge`
-- **instoreRefund**(payload, headers: nil) &#8594; POST to `#{version}/in-store/refund`
+- **instoreMerchantScan**(payload: nil, headers: nil) &#8594 POST to `#{version}/in-store/merchant_scan`
+- **in: payloadstoreCharge**(payload: nil, headers: nil) &#8594 POST to `#{version}/in-store/charge`
+- **instoreRefund**(payload: nil, headers: nil) &#8594 POST to `#{version}/in-store/refund`
 
 # Using Convenience Functions
 
@@ -144,13 +144,13 @@ Four quick steps are needed to make an API call:
 Step 1. Construct a Client (using the previously defined Config object).
 
 ```ruby
-   Client = require('@amazonpay/amazon-pay-api-sdk-noderuby');
+   require 'amazon_pay'
 
-   testPayClient = new Client.AmazonPayClient(config);
-    // -or-
-   testPayClient = new Client.WebStoreClient(config);
-    // -or-
-   testPayClient = AmazonPay::InStoreClient.new(config);
+   client = AmazonPay::AmazonPayClient.new(config)
+    #-or-
+   client = AmazonPay::WebStoreClient.new(config)
+    #-or-
+   client = AmazonPay::InStoreClient.new(config)
 ```
 
 Step 2. Generate the payload.
@@ -158,7 +158,7 @@ Step 2. Generate the payload.
 ```ruby
    payload = {
         scanData: 'UKhrmatMeKdlfY6b',
-        scanReferenceId: uuidv4().toString().replace(/-/g, ''),
+        scanReferenceId: SecureRandom.uuid.to_s.gsub(/-/, ''),
         merchantCOE: 'US',
         ledgerCurrency: 'USD',
         chargeTotal: {
@@ -176,22 +176,22 @@ Step 2. Generate the payload.
                 merchantOrderId: '789123'
             }
         }
-    };
+    }
 ```
 
 Step 3. Execute the call.
 
 ```ruby
-    response = testPayClient.merchantScan(payload);
+    response = client.merchant_scan(payload)
 ```
 
 If you are a Solution Provider and need to make an API call on behalf of a different merchant account, you will need to pass along an extra authentication token parameter into the API call.
 
 ```ruby
-   testHeaders = {
+   test_headers = {
         'x-amz-pay-authtoken': 'other_merchant_super_secret_token'
-    };
-   response = testpayClient.merchantScan(payload, testHeaders);
+    }
+   response = client.merchant_scan(payload: payload, headers: test_headers)
 ```
 
 # Convenience Functions Code Samples
@@ -199,15 +199,14 @@ If you are a Solution Provider and need to make an API call on behalf of a diffe
 ## Alexa Delivery Notifications
 
 ```ruby
-   fs = require('fs');
-   Client = require('@amazonpay/amazon-pay-api-sdk-noderuby');
+   require 'amazon_pay'
 
    config = {
-        publicKeyId: 'ABC123DEF456XYZ',
-        privateKey: fs.readFileSync('tst/private.pem'),
+        public_key_id: 'ABC123DEF456XYZ',
+        private_key: File.read(File.expand_path('/test/private.pem', __dir__)),
         region: 'us',
         sandbox: true
-    };
+    }
 
    payload = {
         amazonOrderReferenceId: 'P00-0000000-0000000',
@@ -215,77 +214,71 @@ If you are a Solution Provider and need to make an API call on behalf of a diffe
             trackingNumber: '1Z999AA10123456789',
             carrierCode: 'UPS'
         }]
-    };
+    }
 
-   testPayClient = new Client.AmazonPayClient(config);
-   response = testPayClient.deliveryTrackers(payload);
+   client = AmazonPay::AmazonPayClient.new(config)
+   response = client.delivery_trackers(payload: payload)
 ```
 
 ## Checkout v2 - Create Checkout Session
 
 ```ruby
-   fs = require('fs');
-   uuidv4 = require('uuid/v4');
-   Client = require('@amazonpay/amazon-pay-api-sdk-noderuby');
+   require 'amazon_pay'
 
    config = {
-        publicKeyId: 'ABC123DEF456XYZ',
-        privateKey: fs.readFileSync('tst/private.pem'),
+        public_key_id: 'ABC123DEF456XYZ',
+        private_key: File.read(File.expand_path('/test/private.pem', __dir__)),
         region: 'us',
         sandbox: true
-    };
+    }
 
    payload = {
         webCheckoutDetails: {
             checkoutReviewReturnUrl: 'https://localhost/store/checkoutReview',
             checkoutResultReturnUrl: 'https://localhost/store/checkoutReturn'
         },
-        storeId: 'amzn1.application-oa2-client.5cc4962582fd4025a2962fc5350582d9' // Enter Client ID
-    };
+        storeId: 'amzn1.application-oa2-client.5cc4962582fd4025a2962fc5350582d9' # Enter Client ID
+    }
    headers = {
-        'x-amz-pay-idempotency-key': uuidv4().toString().replace(/-/g, '')
-    };
+        'x-amz-pay-idempotency-key': SecureRandom.uuid.to_s.gsub(/-/, '')
+    }
 
-   testPayClient = new Client.WebStoreClient(config);
-   response = testPayClient.createCheckoutSession(payload, headers);
+   client = AmazonPay::WebStoreClient.new(config)
+   response = client.createCheckoutSession(payload: nil, headers: nil)
 ```
 
 ## Checkout v2 - Get Checkout Session
 
 ```ruby
-   fs = require('fs');
-   uuidv4 = require('uuid/v4');
-   Client = require('@amazonpay/amazon-pay-api-sdk-noderuby');
+   require 'amazon_pay'
 
    config = {
-        publicKeyId: 'ABC123DEF456XYZ',
-        privateKey: fs.readFileSync('tst/private.pem'),
+        public_key_id: 'ABC123DEF456XYZ',
+        private_key: File.read(File.expand_path('/test/private.pem', __dir__)),
         region: 'us',
         sandbox: true
-    };
+    }
 
    headers = {
-        'x-amz-pay-idempotency-key': uuidv4().toString().replace(/-/g, '')
-    };
+        'x-amz-pay-idempotency-key': SecureRandom.uuid.to_s.gsub(/-/, '')
+    }
 
-   checkout_session_id = 00000000-0000-0000-0000-000000000000;
-   testPayClient = new Client.WebStoreClient(config);
-   response = testPayClient.getCheckoutSession(checkout_session_id, headers);
+   checkout_session_id = '00000000-0000-0000-0000-000000000000'
+   client = AmazonPay::WebStoreClient.new(config)
+   response = client.get_checkout_session(checkout_session_id: checkout_session_id: checkout_session_id, headers: nil)
 ```
 
 ## Checkout v2 - Update Checkout Session
 
 ```ruby
-   fs = require('fs');
-   uuidv4 = require('uuid/v4');
-   Client = require('@amazonpay/amazon-pay-api-sdk-noderuby');
+   require 'amazon_pay'
 
    config = {
-        publicKeyId: 'ABC123DEF456XYZ',
-        privateKey: fs.readFileSync('tst/private.pem'),
+        public_key_id: 'ABC123DEF456XYZ',
+        private_key: File.read(File.expand_path('/test/private.pem', __dir__)),
         region: 'us',
         sandbox: true
-    };
+    }
 
    payload = {
         webCheckoutDetails: {
@@ -300,31 +293,29 @@ If you are a Solution Provider and need to make an API call on behalf of a diffe
             }
         },
         merchantMetadata: {
-            merchantReferenceId: uuidv4().toString().replace(/-/g, ''),
+            merchantReferenceId: SecureRandom.uuid.to_s.gsub(/-/, ''),
             merchantStoreName: 'AmazonTestStoreFront',
             noteToBuyer: 'merchantNoteForBuyer',
             customInformation: ''
         }
-    };
+    }
 
-   checkout_session_id = 00000000-0000-0000-0000-000000000000;
-   testPayClient = new Client.WebStoreClient(config);
-   response = testPayClient.updateCheckoutSession(checkout_session_id, payload);
+   checkout_session_id = '00000000-0000-0000-0000-000000000000'
+   client = AmazonPay::WebStoreClient.new(config)
+   response = client.updateCheckoutSession(checkout_session_id: checkout_session_id, payload: payload)
 ```
 
 ## Checkout v2 - Capture Charge
 
 ```ruby
-   fs = require('fs');
-   uuidv4 = require('uuid/v4');
-   Client = require('@amazonpay/amazon-pay-api-sdk-noderuby');
+   require 'amazon_pay'
 
    config = {
-        publicKeyId: 'ABC123DEF456XYZ',
-        privateKey: fs.readFileSync('tst/private.pem'),
+        public_key_id: 'ABC123DEF456XYZ',
+        private_key: File.read(File.expand_path('/test/private.pem', __dir__)),
         region: 'us',
         sandbox: true
-    };
+    }
 
    payload = {
         captureAmount: {
@@ -332,14 +323,14 @@ If you are a Solution Provider and need to make an API call on behalf of a diffe
             currencyCode: 'USD'
         },
         softDescriptor: 'AMZN'
-    };
+    }
    headers = {
-        'x-amz-pay-idempotency-key': uuidv4().toString().replace(/-/g, '')
-    };
+        'x-amz-pay-idempotency-key': SecureRandom.uuid.to_s.gsub(/-/, '')
+    }
 
-   chargeId = 'S01-0000000-0000000-C000000';
-   testPayClient = new Client.WebStoreClient(config);
-   response = testPayClient.captureCharge(chargeId, payload, headers);
+   charge_id = 'S01-0000000-0000000-C000000'
+   client = AmazonPay::WebStoreClient.new(config)
+   response = client.capture_charge(charge_id: nil, payload: nil, headers: nil)
 ```
 
 ## In Store MerchantScan
@@ -350,40 +341,37 @@ If you are a Solution Provider and need to make an API call on behalf of a diffe
         scanReferenceId: '[scanReferenceId]',
         merchantCOE: 'US',
         ledgerCurrency: 'USD'
-    };
+    }
 
-    testInStoreClient.merchantScan(payload).then(function (response) {
-       merchantScanChargePermissionId = JSON.parse(response.body).charge_permission_id;
-    });
+    response = client.merchant_scan(payload: payload)
+    merchant_scan_charge_permission_id = response[:charge_permission_id]
 ```
 
 ## Generate Button Signature
 
 The signatures generated by this helper function are only valid for the Checkout v2 front-end buttons. Unlike API signing, no timestamps are involved, so the result of this function can be considered a static signature that can safely be placed in your website JS source files and used repeatedly (as long as your payload does not change).
 
-Example call to generateButtonSignature function:
+Example call to generate_button_signature function:
 
 ```ruby
-   fs = require('fs');
-   uuidv4 = require('uuid/v4');
-   Client = require('@amazonpay/amazon-pay-api-sdk-noderuby');
+   require 'amazon_pay'
 
    config = {
-        publicKeyId: 'ABC123DEF456XYZ',
-        privateKey: fs.readFileSync('tst/private.pem'),
+        public_key_id: 'ABC123DEF456XYZ',
+        private_key: File.read(File.expand_path('/test/private.pem', __dir__)),
         region: 'us',
         sandbox: true
-    };
+    }
 
-   testPayClient = new Client.AmazonPayClient(config);
+   client = AmazonPay::AmazonPayClient(config)
    payload = {
         webCheckoutDetails: {
             checkoutReviewReturnUrl: 'https://localhost/test/checkoutReview.html',
             checkoutResultReturnUrl: 'https://localhost/test/checkoutResult.html'
         },
         storeId: 'amzn1.application-oa2-client.xxxxx'
-    };
-   signature = testPayClient.generateButtonSignature(payload);
+    }
+   signature = client.generate_button_signature(payload: payload)
 ```
 
 ## Manual Signing (Advanced Use-Cases Only)
@@ -407,8 +395,8 @@ Example request method:
 ```ruby
    options = {
         method: 'POST',
-        urlFragment: '#{version}/in-store/merchantScan',
-        payload = {
+        urlFragment: '#{version}/in-store/merchant_scan',
+     : payload   payload = {
             scanData: 'UKhrmatMeKdlfY6b',
             scanReferenceId: '0b8fb271-2ae2-49a5-b35d4',
             merchantCOE: 'US',
@@ -429,10 +417,10 @@ Example request method:
                 }
             }
         }
-    };
+    }
 
-   client = AmazonPay::InStoreClient.new(config);
-   signedHeders = client.api_call(options);
+   client = AmazonPay::InStoreClient.new(config)
+   signedHeders = client.api_call(options)
 ```
 
 Example call to get_signed_headers function with values:
@@ -454,8 +442,8 @@ Example request method:
 ```ruby
    options = {
         method: 'POST',
-        urlFragment: '#{version}/in-store/merchantScan',
-        payload = {
+        urlFragment: '#{version}/in-store/merchant_scan',
+     : payload   payload = {
             scanData: 'UKhrmatMeKdlfY6b',
             scanReferenceId: '0b8fb271-2ae2-49a5-b35d4',
             merchantCOE: 'US',
@@ -481,8 +469,8 @@ Example request method:
             'Content-Type': 'application/rubyon'
             'X-Amz-Pay-Region': 'us'
         }
-    };
+    }
 
-   client = new Client.AmazonPayClient(config);
-   signedHeaders = client.get_signed_headers(options);
+   client = AmazonPay::AmazonPayClient(config)
+   signedHeaders = client.get_signed_headers(options)
 ```
