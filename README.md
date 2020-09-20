@@ -107,35 +107,35 @@ The headers field is not optional for create/POST calls below because it require
 ### Checkout v2 CheckoutSession object
 
 - **createCheckoutSession**(payload: nil, headers: nil) &#8594; POST to `#{version}/checkoutSessions`
-- **getCheckoutSession**(checkout_session_id: , headers = null) &#8594; GET to `#{version}/checkoutSessions/#{checkout_session_id}`
-- **updateCheckoutSession**(checkout_session_id, payload, headers = null) &#8594; PATCH to `#{version}/checkoutSessions#{checkout_session_id}`
-- **completeCheckoutSession**(checkout_session_id, payload, headers = null) &#8594; POST to `#{version}/checkoutSessions#{checkout_session_id}/complete`
+- **getCheckoutSession**(checkout_session_id: nil, headers: nil) &#8594; GET to `#{version}/checkoutSessions/#{checkout_session_id}`
+- **updateCheckoutSession**(checkout_session_id: nil, payload: nil, headers: nil) &#8594; PATCH to `#{version}/checkoutSessions#{checkout_session_id}`
+- **completeCheckoutSession**(checkout_session_id: nil, payload: nil, headers: nil) &#8594; POST to `#{version}/checkoutSessions#{checkout_session_id}/complete`
 
 ### Checkout v2 ChargePermission object
 
-- **getChargePermission**(chargePermissionId, headers = null) &#8594; GET to `#{version}/chargePermissions/#{chargePermissionId}`
-- **updateChargePermission**(chargePermissionId, payload, headers = null) &#8594; PATCH to `#{version}/chargePermissions#{chargePermissionId}`
-- **closeChargePermission**(chargePermissionId, payload, headers = null) &#8594; DELETE to `#{version}/chargePermissions#{chargePermissionId}/close`
+- **getChargePermission**(charge_permission_id: nil, headers: nil) &#8594; GET to `#{version}/chargePermissions/#{charge_permission_id}`
+- **updateChargePermission**(charge_permission_id: nil, payload: nil, headers: nil) &#8594; PATCH to `#{version}/chargePermissions#{charge_permission_id}`
+- **closeChargePermission**(charge_permission_id: nil, payload: nil, headers: nil) &#8594; DELETE to `#{version}/chargePermissions#{charge_permission_id}/close`
 
 ### Checkout v2 Charge object
 
 - **createCharge**(payload, headers) &#8594; POST to `#{version}/charges`
-- **getCharge**(chargeId, headers = null) &#8594; GET to `#{version}/charges/#{chargeId}`
+- **getCharge**(chargeId, headers: nil) &#8594; GET to `#{version}/charges/#{chargeId}`
 - **captureCharge**(chargeId, payload, headers) &#8594; POST to `#{version}/charges/#{chargeId}/capture`
-- **cancelCharge**(chargeId, payload, headers = null) &#8594; DELETE to `#{version}/charges/#{chargeId}/cancel`
+- **cancelCharge**(chargeId, payload, headers: nil) &#8594; DELETE to `#{version}/charges/#{chargeId}/cancel`
 
 ### Checkout v2 Refund object
 
 - **createRefund**(payload, headers) &#8594; POST to `#{version}/refunds`
-- **getRefund**(refundId, headers = null) &#8594; GET to `#{version}/refunds/#{refundId}`
+- **getRefund**(refundId, headers: nil) &#8594; GET to `#{version}/refunds/#{refundId}`
 
 ## In-Store API
 
 Please contact your Amazon Pay Account Manager before using the In-Store API calls in a Production environment to obtain a copy of the In-Store Integration Guide.
 
-- **instoreMerchantScan**(payload, headers = null) &#8594; POST to `#{version}/in-store/merchantScan`
-- **instoreCharge**(payload, headers = null) &#8594; POST to `#{version}/in-store/charge`
-- **instoreRefund**(payload, headers = null) &#8594; POST to `#{version}/in-store/refund`
+- **instoreMerchantScan**(payload, headers: nil) &#8594; POST to `#{version}/in-store/merchantScan`
+- **instoreCharge**(payload, headers: nil) &#8594; POST to `#{version}/in-store/charge`
+- **instoreRefund**(payload, headers: nil) &#8594; POST to `#{version}/in-store/refund`
 
 # Using Convenience Functions
 
@@ -353,7 +353,7 @@ If you are a Solution Provider and need to make an API call on behalf of a diffe
     };
 
     testInStoreClient.merchantScan(payload).then(function (response) {
-       merchantScanChargePermissionId = JSON.parse(response.body).chargePermissionId;
+       merchantScanChargePermissionId = JSON.parse(response.body).charge_permission_id;
     });
 ```
 
