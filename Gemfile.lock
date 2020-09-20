@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    amazon_pay (0.1.0)
+    amazon_pay (2.0.0)
 
 GEM
   remote: https://rubygems.org/

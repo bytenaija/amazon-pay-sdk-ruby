@@ -41,7 +41,7 @@ end
 RSpec.describe 'AmazonPay Client Test Cases - Get Authorization Token' do
   before do
     if mws_auth_token.empty? || merchant_id.empty?
-      skip 'Enter your  mws_auth_token and merchant_id babovebefore running this test'
+      skip 'Please provide your mws_auth_token and merchant_id before executing these test cases'
     end
   end
 
