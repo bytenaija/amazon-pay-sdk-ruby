@@ -15,14 +15,13 @@ module AmazonPay
     #     @param {String} buyer_token - The checkout session Id
     #     @param {Object} [headers=nil] - The headers for the request
 
-    def get_buyer(buyer_token, headers = nil)
-      api_call(
+    def get_buyer(buyer_token: nil, headers: nil)
+      api_call(options:
         {
           method: 'GET',
           url_fragment: "buyers/#{buyer_token}",
           headers: headers
-        }
-      )
+        })
     end
 
     #  API to create a CheckoutSession object
@@ -30,13 +29,13 @@ module AmazonPay
     #   @see https://amazonpaycheckoutintegrationguide.s3.amazonaws.com/amazon-pay-api-v2/checkout-session.html#create-checkout-session
     #   @param {Object} payload - The payload for the request
     #   @param {Object} headers - The headers for the request
-    def create_checkout_session(payload, headers)
-      api_call({
-                method: 'POST',
-                url_fragment: 'checkoutSessions',
-                payload: payload,
-                headers: headers,
-              })
+    def create_checkout_session(payload: nil, headers: nil)
+      api_call(options: {
+                 method: 'POST',
+                 url_fragment: 'checkoutSessions',
+                 payload: payload,
+                 headers: headers
+               })
     end
 
     # API to get the CheckoutSession object
@@ -45,12 +44,12 @@ module AmazonPay
     #   @param {String} checkout_session_id - The checkout session Id
     #   @param {Object} [headers=nil] - The headers for the request
     def get_checkout_session(checkout_session_id: nil, headers: nil)
-      Rails.logger.debug("amazonCheckoutSessionId, #{checkout_session_id}, #{headers}")
-      api_call({
-                method: 'GET',
-                url_fragment: "checkoutSessions/#{checkout_session_id}",
-                headers: headers,
-              })
+      # Rails.logger.debug("amazonCheckoutSessionId, #{checkout_session_id}, #{headers}")
+      api_call(options: {
+                 method: 'GET',
+                 url_fragment: "checkoutSessions/#{checkout_session_id}",
+                 headers: headers
+               })
     end
 
     # API to update the CheckoutSession object
@@ -60,12 +59,12 @@ module AmazonPay
     #   @param {Object} payload - The payload for the request
     #   @param {Object} [headers=nil] - The headers for the request
     def update_checkout_session(checkout_session_id: nil, payload: nil, headers: nil)
-      api_call({
-                method: 'PATCH',
-                url_fragment: "checkoutSessions/#{checkout_session_id}",
-                payload: payload,
-                headers: headers,
-              })
+      api_call(options: {
+                 method: 'PATCH',
+                 url_fragment: "checkoutSessions/#{checkout_session_id}",
+                 payload: payload,
+                 headers: headers
+               })
     end
 
     # API to complete a Checkout Session
@@ -74,13 +73,13 @@ module AmazonPay
     #   @param {String} checkout_session_id - The checkout session Id
     #   @param {Object} payload - The payload for the request
     #   @param {Object} [headers=nil] - The headers for the request
-    def complete_checkout_session(checkout_session_id, payload, headers = nil)
-      api_call({
-                method: 'POST',
-                url_fragment: "checkoutSessions/#{checkout_session_id}/complete",
-                payload: payload,
-                headers: headers,
-              })
+    def complete_checkout_session(checkout_session_id: nil, payload: nil, headers: nil)
+      api_call(options: {
+                 method: 'POST',
+                 url_fragment: "checkoutSessions/#{checkout_session_id}/complete",
+                 payload: payload,
+                 headers: headers
+               })
     end
 
     # API to get a ChargePermission object
@@ -88,12 +87,12 @@ module AmazonPay
     #   @see https://amazonpaycheckoutintegrationguide.s3.amazonaws.com/amazon-pay-api-v2/charge-permission.html#get-charge-permission
     #   @param {String} charge_permission_id - The charge permission Id
     #   @param {Object} [headers=nil] - The headers for the request
-    def get_charge_permission(charge_permission_id, headers = nil)
-      api_call({
-                method: 'GET',
-                url_fragment: "chargePermissions/#{charge_permission_id}",
-                headers: headers,
-              })
+    def get_charge_permission(charge_permission_id: nil, headers: nil)
+      api_call(options: {
+                 method: 'GET',
+                 url_fragment: "chargePermissions/#{charge_permission_id}",
+                 headers: headers
+               })
     end
 
     # API to update a ChargePermission object
@@ -102,13 +101,13 @@ module AmazonPay
     #   @param {String} charge_permission_id - The charge permission Id
     #   @param {Object} payload - The payload for the request
     #   @param {Object} [headers=nil] - The headers for the request
-    def update_charge_permission(charge_permission_id, payload, headers = nil)
-      api_call({
-                method: 'PATCH',
-                url_fragment: "chargePermissions/#{charge_permission_id}",
-                payload: payload,
-                headers: headers,
-              })
+    def update_charge_permission(charge_permission_id: nil, payload: nil, headers: nil)
+      api_call(options: {
+                 method: 'PATCH',
+                 url_fragment: "chargePermissions/#{charge_permission_id}",
+                 payload: payload,
+                 headers: headers
+               })
     end
 
     # API to close a ChargePermission object
@@ -117,13 +116,13 @@ module AmazonPay
     #   @param {String} charge_permission_id - The charge permission Id
     #   @param {Object} payload - The payload for the request
     #   @param {Object} [headers=nil] - The headers for the request
-    def close_charge_permission(charge_permission_id, payload, headers = nil)
-      api_call({
-                method: 'DELETE',
-                url_fragment: "chargePermissions/#{charge_permission_id}/close",
-                payload: payload,
-                headers: headers,
-              })
+    def close_charge_permission(charge_permission_id: nil, payload: nil, headers: nil)
+      api_call(options: {
+                 method: 'DELETE',
+                 url_fragment: "chargePermissions/#{charge_permission_id}/close",
+                 payload: payload,
+                 headers: headers
+               })
     end
 
     # API to create a Charge object
@@ -131,13 +130,13 @@ module AmazonPay
     #   @see https://amazonpaycheckoutintegrationguide.s3.amazonaws.com/amazon-pay-api-v2/charge.html#create-charge
     #   @param {Object} payload - The payload for the request
     #   @param {Object} headers - The headers for the request
-    def create_charge(payload, headers)
-      api_call({
-                method: 'POST',
-                url_fragment: 'charges',
-                payload: payload,
-                headers: headers,
-              })
+    def create_charge(payload: nil, headers: nil)
+      api_call(options: {
+                 method: 'POST',
+                 url_fragment: 'charges',
+                 payload: payload,
+                 headers: headers
+               })
     end
 
     # API to get the Charge object
@@ -145,12 +144,12 @@ module AmazonPay
     #   @see https://amazonpaycheckoutintegrationguide.s3.amazonaws.com/amazon-pay-api-v2/charge.html#get-charge
     #   @param {String} charge_id - The charge Id
     #   @param {Object} [headers=nil] - The headers for the request
-    def get_charge(charge_id, headers = nil)
-      api_call({
-                method: 'GET',
-                url_fragment: "charges/#{charge_id}",
-                headers: headers,
-              })
+    def get_charge(charge_id: nil, headers: nil)
+      api_call(options: {
+                 method: 'GET',
+                 url_fragment: "charges/#{charge_id}",
+                 headers: headers
+               })
     end
 
     #  API to create a captureCharge request
@@ -160,13 +159,13 @@ module AmazonPay
     #   @param {Object} payload - The payload for the request
     #   @param {Object} [headers=nil] - The headers for the request
 
-    def capture_charge(charge_id, payload, headers = nil)
-      api_call({
-                method: 'POST',
-                url_fragment: "charges/#{charge_id}/capture",
-                payload: payload,
-                headers: headers,
-              })
+    def capture_charge(charge_id: nil, payload: nil, headers: nil)
+      api_call(options: {
+                 method: 'POST',
+                 url_fragment: "charges/#{charge_id}/capture",
+                 payload: payload,
+                 headers: headers
+               })
     end
 
     #  API to create a cancelCharge request
@@ -176,13 +175,13 @@ module AmazonPay
     #   @param {Object} payload - The payload for the request
     #   @param {Object} [headers=nil] - The headers for the request
 
-    def cancel_charge(charge_id, payload, headers = nil)
-      api_call({
-                method: 'DELETE',
-                url_fragment: "charges/#{charge_id}/cancel",
-                payload: payload,
-                headers: headers,
-              })
+    def cancel_charge(charge_id: nil, payload: nil, headers: nil)
+      api_call(options: {
+                 method: 'DELETE',
+                 url_fragment: "charges/#{charge_id}/cancel",
+                 payload: payload,
+                 headers: headers
+               })
     end
 
     #  API to create a Refund object
@@ -191,13 +190,13 @@ module AmazonPay
     #     @param {Object} payload - The payload for the request
     #     @param {Object} headers - The headers for the request
 
-    def create_refund(payload, headers)
-      api_call({
-                method: 'POST',
-                url_fragment: 'refunds',
-                payload: payload,
-                headers: headers,
-              })
+    def create_refund(payload: nil, headers: nil)
+      api_call(options: {
+                 method: 'POST',
+                 url_fragment: 'refunds',
+                 payload: payload,
+                 headers: headers
+               })
     end
 
     #  API to get a Refund object
@@ -206,12 +205,12 @@ module AmazonPay
     #   @param {String} refundId - The refund Id
     #   @param {Object} [headers=nil] - The headers for the request
 
-    def get_refund(refund_id, headers = nil)
-      api_call({
-                method: 'GET',
-                url_fragment: "refunds/#{refund_id}",
-                headers: headers,
-              })
+    def get_refund(refund_id: nil, headers: nil)
+      api_call(options: {
+                 method: 'GET',
+                 url_fragment: "refunds/#{refund_id}",
+                 headers: headers
+               })
     end
   end
 end
