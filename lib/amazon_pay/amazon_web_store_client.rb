@@ -44,7 +44,6 @@ module AmazonPay
     #   @param {String} checkout_session_id - The checkout session Id
     #   @param {Object} [headers=nil] - The headers for the request
     def get_checkout_session(checkout_session_id: nil, headers: nil)
-      # Rails.logger.debug("amazonCheckoutSessionId, #{checkout_session_id}, #{headers}")
       api_call(options: {
                  method: 'GET',
                  url_fragment: "checkoutSessions/#{checkout_session_id}",

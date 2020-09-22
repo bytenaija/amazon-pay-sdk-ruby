@@ -9,6 +9,7 @@ require 'net/http'
 require 'amazon_pay/constants'
 
 module AmazonPay
+  # All the helper files
   class ClientHelper
     def self.fetch_timestamp
       Time.now.utc.iso8601
@@ -96,7 +97,7 @@ module AmazonPay
 
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = true
-        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
         case options[:method].to_sym
         when :GET
@@ -146,7 +147,7 @@ module AmazonPay
       end
 
       canonical_request =
-        options[:method] + "\n" +
+        options[:method] + "\n/" +
         options[:url_fragment] + "\n" +
         fetch_parameters_as_string(request_params: options[:query_params]) +
         "\n"

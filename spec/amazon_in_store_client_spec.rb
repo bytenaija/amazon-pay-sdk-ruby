@@ -1,5 +1,4 @@
-headers = {}
-headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
+# rubocop:disable Metrics/BlockLength
 
 config = Config.get_config
 
@@ -45,6 +44,8 @@ refund_expected_response = {
 
 RSpec.describe 'InStore Client Test Cases' do
   it 'Validating Merchant Scan API' do
+    headers = {}
+    headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
     result = client.merchant_scan(payload: merchant_scan_payload, headers: headers)
     charge_permission_id = result[:chargePermissionId]
     result = result.transform_keys(&:to_sym)
@@ -52,6 +53,8 @@ RSpec.describe 'InStore Client Test Cases' do
   end
 
   it 'Validating Charge API' do
+    headers = {}
+    headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
     charge_payload = {
       chargePermissionId: charge_permission_id,
       chargeReferenceId: SecureRandom.uuid.to_s.gsub(/-/, ''),
@@ -68,6 +71,8 @@ RSpec.describe 'InStore Client Test Cases' do
   end
 
   it 'Validating Refund API' do
+    headers = {}
+    headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
     refund_payload = {
       chargeId: charge_id,
       refundReferenceId: SecureRandom.uuid.to_s.gsub(/-/, ''),

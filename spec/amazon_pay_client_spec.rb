@@ -51,7 +51,6 @@ RSpec.describe 'AmazonPay Client Test Cases - Get Authorization Token' do
     client = AmazonPay::AmazonPayClient.new(config)
 
     result = client.get_authorization_token(mws_auth_token: mws_auth_token, merchant_id: merchant_id)
-    puts result
     expect(result[:authorizationToken]).to be_truthy
   end
 end

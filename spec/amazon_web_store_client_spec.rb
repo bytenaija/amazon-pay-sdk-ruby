@@ -1,5 +1,4 @@
-headers = {}
-headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
+# rubocop:disable Metrics/BlockLength
 
 charge_permission_id = '' # Enter Charge Permission ID
 buyer_token = '' # Enter Buyer Token
@@ -21,7 +20,7 @@ create_checkout_session_payload = {
 
 update_checkout_session_payload = {
   paymentDetails: {
-    paymentIntent: 'Confirm',
+    paymentIntent: 'AuthorizeWithCapture',
     chargeAmount: {
       amount: 50,
       currencyCode: config[:currency_code]
@@ -112,11 +111,15 @@ RSpec.describe 'WebStore Client Test Cases - Checkout Session APIs' do
   }
 
   it 'Validating Get Buyer API' do
+    headers = {}
+    headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
     result = client.get_buyer(buyer_token: buyer_token, headers: headers)
     expect(result[:buyerId]).to start_with('amzn1.account.')
   end
 
   it 'Validating Create Checkout Session API' do
+    headers = {}
+    headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
     result = client.create_checkout_session(payload: create_checkout_session_payload, headers: headers)
     result = result.transform_keys(&:to_sym)
     checkout_session_id = result[:checkoutSessionId]
@@ -124,19 +127,34 @@ RSpec.describe 'WebStore Client Test Cases - Checkout Session APIs' do
   end
 
   it 'Validating Get Checkout Session API' do
+    headers = {}
+    headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
     result = client.get_checkout_session(checkout_session_id: checkout_session_id, headers: headers)
     result = result.transform_keys(&:to_sym)
     expect(result.keys).to eq(expected_response.keys)
   end
 
   it 'Validating Update Checkout Session API' do
-    result = client.update_checkout_session(checkout_session_id: checkout_session_id, payload: update_checkout_session_payload, headers: headers)
+    headers = {}
+    headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
+    result = client.update_checkout_session(
+      checkout_session_id: checkout_session_id,
+      payload: update_checkout_session_payload,
+      headers: headers
+    )
     result = result.transform_keys(&:to_sym)
     expect(result.keys).to eq(expected_response.keys)
   end
 
-  it 'Validating Complete Checkout Session API' do
-    result = client.update_checkout_session(checkout_session_id: checkout_session_id, payload: complete_checkout_session_payload, headers: headers)
+  # Can only run this after visiting amazonPayRedirectUrl
+  xit 'Validating Complete Checkout Session API' do
+    headers = {}
+    headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
+    result = client.complete_checkout_session(
+      checkout_session_id: checkout_session_id,
+      payload: complete_checkout_session_payload,
+      headers: headers
+    )
     result = result.transform_keys(&:to_sym)
     expect(result.keys).to eq(expected_response.keys)
   end
@@ -166,19 +184,33 @@ RSpec.describe '' do
     }
 
     it 'Validating Get Charge Permission API' do
+      headers = {}
+      headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
       result = client.get_charge_permission(charge_permission_id: charge_permission_id, headers: headers)
       result = result.transform_keys(&:to_sym)
       expect(result.keys).to eq(expected_response.keys)
     end
 
     it 'Validating Update Charge Permission API' do
-      result = client.update_charge_permission(charge_permission_id: charge_permission_id, payload: update_charge_permission_payload, headers: headers)
+      headers = {}
+      headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
+      result = client.update_charge_permission(
+        charge_permission_id: charge_permission_id,
+        payload: update_charge_permission_payload,
+        headers: headers
+      )
       result = result.transform_keys(&:to_sym)
       expect(result.keys).to eq(expected_response.keys)
     end
 
     it 'Validating Close Charge Permission API' do
-      result = client.close_charge_permission(charge_permission_id: charge_permission_id, payload: close_charge_permission_payload, headers: headers)
+      headers = {}
+      headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
+      result = client.close_charge_permission(
+        charge_permission_id: charge_permission_id,
+        payload: close_charge_permission_payload,
+        headers: headers
+      )
       result = result.transform_keys(&:to_sym)
       expect(result.keys).to eq(expected_response.keys)
     end
@@ -203,6 +235,8 @@ RSpec.describe 'WebStore Client Test Cases - Charge APIs' do
     releaseEnvironment: ''
   }
   it 'Validating Create Charge API' do
+    headers = {}
+    headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
     result = client.create_charge(payload: create_charge_payload, headers: headers)
     charge_id = result[:chargeId]
     result = result.transform_keys(&:to_sym)
@@ -210,6 +244,8 @@ RSpec.describe 'WebStore Client Test Cases - Charge APIs' do
   end
 
   it 'Validating Get Charge API' do
+    headers = {}
+    headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
     result = client.get_charge(charge_id: charge_id, headers: headers)
     result = result.transform_keys(&:to_sym)
     expect(result.keys).to eq(expected_response.keys)
@@ -225,6 +261,8 @@ RSpec.describe 'WebStore Client Test Cases - Charge APIs' do
 
   # Cannot Run both Capture charge and Cancel charge at same time, Run either Capture Capture or Cancel Charge
   xit 'Validating Cancel Charge API' do
+    headers = {}
+    headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
     result = client.cancel_charge(charge_id: charge_id, payload: cancel_charge_payload, headers: headers)
     result = result.transform_keys(&:to_sym)
     expect(result.keys).to eq(expected_response.keys)
@@ -235,9 +273,6 @@ RSpec.describe 'WebStore Client Test Cases - Refund APIs' do
   before do
     skip 'Please Enter charge_permission_id and execute test cases' if charge_permission_id.empty?
   end
-
-  headers = {}
-  headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
 
   expected_response = {
     refundId: '',
@@ -250,6 +285,8 @@ RSpec.describe 'WebStore Client Test Cases - Refund APIs' do
   }
 
   it 'Validating Create Refund API' do
+    headers = {}
+    headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
     refund_paylod = {
       chargeId: charge_id,
       refundAmount: {
@@ -265,6 +302,8 @@ RSpec.describe 'WebStore Client Test Cases - Refund APIs' do
   end
 
   it 'Validating Get Refund API' do
+    headers = {}
+    headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
     result = client.get_refund(refund_id: refund_id, headers: headers)
     result = result.transform_keys(&:to_sym)
     expect(result.keys).to eq(expected_response.keys)
