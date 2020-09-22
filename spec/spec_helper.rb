@@ -1,5 +1,5 @@
 require 'bundler/setup'
-require 'amazon_pay'
+require 'amazon_pay_sdk_ruby'
 require 'config'
 require 'base64'
 require 'securerandom'
