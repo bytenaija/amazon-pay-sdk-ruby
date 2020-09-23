@@ -11,9 +11,9 @@ module AmazonPay
     # @param {Object} options - The options to make the API Call
     # @param {String} options.method - The HTTP request method
     # @param {String} options.url_fragment - The URI for the API Call
-    # @param {String} [options.payload=null] - The payload for the API Call
-    # @param {Object} [options.headers=null] - The headers for the API Call
-    # @param {Object} [options.queryParams=null] - The headers for the API Call
+    # @param {String} [options.payload=nil] - The payload for the API Call
+    # @param {Object} [options.headers=nil] - The headers for the API Call
+    # @param {Object} [options.queryParams=nil] - The headers for the API Call
 
     def api_call(options: {})
       prepared_options = AmazonPay::ClientHelper.prepare_options(config_args: @config_args, options: options)
@@ -26,8 +26,8 @@ module AmazonPay
     #     @param {Object} options - The options to make the API Call
     #     @param {String} options.method - The HTTP request method
     #     @param {String} options.url_fragment - The URI for the API Call
-    #     @param {String} [options.payload=null] - The payload for the API Call
-    #     @param {Object} [options.headers=null] - The headers for the API Call
+    #     @param {String} [options.payload=nil] - The payload for the API Call
+    #     @param {Object} [options.headers=nil] - The headers for the API Call
 
     def get_signed_headers(options: {})
       prepared_options = AmazonPay::ClientHelper.prepare_options(@config_args, options)
@@ -38,7 +38,7 @@ module AmazonPay
     #       - Please note that your solution provider account must have a pre-existing relationship (valid and active MWS authorization token) with the merchant account in order to use this function.
     #     @param {String} mws_auth_token - The mws_auth_token
     #     @param {String} merchant_id - The merchant_id
-    #     @param {Object} [headers=null] - The headers for the request
+    #     @param {Object} [headers=nil] - The headers for the request
 
     def get_authorization_token(mws_auth_token: nil, merchant_id: nil, headers: nil)
       api_call(options: {
@@ -71,7 +71,7 @@ module AmazonPay
     #   @param {String} payload.trackingNumber - The tracking number for the shipment provided by
     #                   the shipping company
     #   @param {Object} payload.carrierCode - The shipping company code used for delivering goods to the customer
-    #   @param {Object} [headers=null] - The headers for the request
+    #   @param {Object} [headers=nil] - The headers for the request
 
     def delivery_trackers(payload: nil, headers: nil)
       api_call(options: {

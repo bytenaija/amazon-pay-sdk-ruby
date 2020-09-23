@@ -9,7 +9,7 @@ module AmazonPay
     #   - Initiates a purchase with a merchant.
     # @see //TODO Update Live URL
     # @param {Object} payload - The payload for the request
-    # @param {Object} [headers=null] - The headers for the request
+    # @param {Object} [headers=nil] - The headers for the request
     #
     def merchant_scan(payload: nil, headers: nil)
       api_call(options: {
@@ -24,7 +24,7 @@ module AmazonPay
     #   - Creates a charge to the buyer with the requested amount.
     # @see //TODO Update Live URL
     # @param {Object} payload - The payload for the request
-    # @param {Object} [headers=null] - The headers for the request
+    # @param {Object} [headers=nil] - The headers for the request
     #
     def charge(payload: nil, headers: nil)
       api_call(options: {
@@ -39,7 +39,7 @@ module AmazonPay
     #   - Refunds an amount that was previously charged to the buyer.
     # @see //TODO Update Live URL
     # @param {Object} payload - The payload for the request
-    # @param {Object} [headers=null] - The headers for the request
+    # @param {Object} [headers=nil] - The headers for the request
     #
     def refund(payload: nil, headers: nil)
       api_call(options: {
