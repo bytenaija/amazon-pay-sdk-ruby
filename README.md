@@ -1,5 +1,7 @@
 # Amazon Pay API SDK (Ruby)
 
+[![Gem Version](https://badge.fury.io/rb/amazon_pay_sdk_ruby.svg)](https://badge.fury.io/rb/amazon_pay_sdk_ruby)
+
 Amazon Pay Checkout v2 Integration
 
 Please note the Amazon Pay API SDK can only be used for API calls to the pay-api.amazon.com|eu|jp endpoint.
