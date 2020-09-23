@@ -1,4 +1,4 @@
-generate_button_signature_payload_object = {
+generate_button_signature_payload_Hash = {
   storeId: 'amzn1.application-oa2-client.a950c92bb0cc4ae08ef395668b702bb9',
   webCheckoutDetails: {
     checkoutReviewReturnUrl: 'https://localhost/test/CheckoutReview',
@@ -28,7 +28,7 @@ RSpec.describe 'AmazonPay Client Test Cases - Generate Button Signature' do
   it 'Validating Generate Button Signature Method' do
     client = AmazonPay::AmazonPayClient.new(Config.get_config)
 
-    signature_one = client.generate_button_signature(payload: generate_button_signature_payload_object)
+    signature_one = client.generate_button_signature(payload: generate_button_signature_payload_Hash)
     signature_two = client.generate_button_signature(payload: generate_button_signature_payload_string)
     signature_three = client.generate_button_signature(payload: generate_button_signature_payload_escaped_string)
 

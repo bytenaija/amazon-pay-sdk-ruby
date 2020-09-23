@@ -102,31 +102,31 @@ The headers field is not optional for create/POST calls below because it require
     }
 ```
 
-### Amazon Checkout v2 Buyer object
+### Amazon Checkout v2 Buyer Hash
 
 - **get_buyer**(buyer_token: nil, headers: nil) &#8594 GET to `#{version}/buyer/{$buyerToken}`
 
-### Checkout v2 CheckoutSession object
+### Checkout v2 CheckoutSession Hash
 
 - **create_checkout_session**(payload: nil, headers: nil) &#8594 POST to `#{version}/checkoutSessions`
 - **get_checkout_session**(checkout_session_id: nil, headers: nil) &#8594 GET to `#{version}/checkoutSessions/#{checkout_session_id}`
 - **update_checkout_session**(checkout_session_id: nil, payload: nil, headers: nil) &#8594 PATCH to `#{version}/checkoutSessions#{checkout_session_id}`
 - **complete_checkout_session**(checkout_session_id: nil, payload: nil, headers: nil) &#8594 POST to `#{version}/checkoutSessions#{checkout_session_id}/complete`
 
-### Checkout v2 ChargePermission object
+### Checkout v2 ChargePermission Hash
 
 - **get_charge_permission**(charge_permission_id: nil, headers: nil) &#8594 GET to `#{version}/chargePermissions/#{charge_permission_id}`
 - **update_charge_permission**(charge_permission_id: nil, payload: nil, headers: nil) &#8594 PATCH to `#{version}/chargePermissions#{charge_permission_id}`
 - **close_charge_permission**(charge_permission_id: nil, payload: nil, headers: nil) &#8594 DELETE to `#{version}/chargePermissions#{charge_permission_id}/close`
 
-### Checkout v2 Charge object
+### Checkout v2 Charge Hash
 
 - **create_charge**(payload: nil, headers: nil) &#8594 POST to `#{version}/charges`
 - **get_charge**(charge_id: nil, headers: nil) &#8594 GET to `#{version}/charges/#{charge_id}`
 - **capture_charge**(charge_id: nil, payload: nil, headers: nil) &#8594 POST to `#{version}/charges/#{charge_id}/capture`
 - **cancel_charge**(charge_id: nil, payload: nil, headers: nil) &#8594 DELETE to `#{version}/charges/#{charge_id}/cancel`
 
-### Checkout v2 Refund object
+### Checkout v2 Refund Hash
 
 - **create_refund**(payload: nil, headers: nil) &#8594 POST to `#{version}/refunds`
 - **get_refund**(refund_id: nil, headers: nil) &#8594 GET to `#{version}/refunds/#{refund_id}`
@@ -143,7 +143,7 @@ Please contact your Amazon Pay Account Manager before using the In-Store API cal
 
 Four quick steps are needed to make an API call:
 
-Step 1. Construct a Client (using the previously defined Config object).
+Step 1. Construct a Client (using the previously defined Config Hash).
 
 ```ruby
    require 'amazon_pay_sdk_ruby'
@@ -385,7 +385,7 @@ Example call to api_call method with values:
 ```ruby
     /** API to process a request
      *   - Makes an API Call using the specified options.
-     * @param {Object} options - The options to make the API Call
+     * @param {Hash} options - The options to make the API Call
      * @param {String} options.method - The HTTP request method
      * @param {String} options.url_fragment - The URI for the API Call
      * @param {String} [options.payload=nil] - The payload for the API Call
@@ -430,8 +430,8 @@ Example call to get_signed_headers method with values:
 
 ```ruby
     /** Signs the request headers
-     *   - Signs the request provided and returns the signed headers object.
-     * @param {Object} options - The options to make the API Call
+     *   - Signs the request provided and returns the signed headers Hash.
+     * @param {Hash} options - The options to make the API Call
      * @param {String} options.method - The HTTP request method
      * @param {String} options.url_fragment - The URI for the API Call
      * @param {String} [options.payload=nil] - The payload for the API Call

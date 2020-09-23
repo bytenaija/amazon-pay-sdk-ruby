@@ -58,7 +58,7 @@ module AmazonPay
     def self.prepare_options(config_args: {}, options: {})
       options[:headers] ||= {}
 
-      # if user doesn't pass in a string, assume it's a JS object and convert it to a JSON string
+      # if user doesn't pass in a string, assume it's a JS Hash and convert it to a JSON string
       unless options[:payload].is_a?(String) || options[:payload].nil?
         options[:payload] = JSON.generate(options[:payload])
       end
@@ -175,7 +175,7 @@ module AmazonPay
     end
 
     def self.sign_payload(config_args: nil, payload: nil)
-      # if user doesn't pass in a string, assume it's a JS object and convert it to a JSON string
+      # if user doesn't pass in a string, assume it's a JS Hash and convert it to a JSON string
       payload = JSON.generate(payload) unless payload.is_a?(String)
       string_to_sign = AmazonPay::CONSTANTS[:AMAZON_SIGNATURE_ALGORITHM] + "\n" +
                        OpenSSL::Digest::SHA256.hexdigest(payload)
