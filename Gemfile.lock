@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    amazon_pay_ruby_sdk (2.0.1)
+    amazon_pay_sdk_ruby (2.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -26,7 +26,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  amazon_pay_ruby_sdk!
+  amazon_pay_sdk_ruby!
   bundler (~> 1.17)
   rake (~> 10.0)
   rspec (~> 3.0)

@@ -78,8 +78,23 @@ cancel_charge_payload = {
 
 RSpec.describe 'WebStore Client Test Cases - Checkout Session APIs' do
   before do
-    if create_checkout_session_payload[:storeId].empty?
+    if buyer_token.empty?
       skip 'Please provide storeId in the payload before executing these test cases'
+    end
+  end
+
+  it 'Validating Get Buyer API' do
+    headers = {}
+    headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
+    result = client.get_buyer(buyer_token: buyer_token, headers: headers)
+    expect(result[:buyerId]).to start_with('amzn1.account.')
+  end
+end
+
+RSpec.describe 'WebStore Client Test Cases - Checkout Session APIs' do
+  before do
+    if create_checkout_session_payload[:storeId].empty?
+       skip 'Please provide a buyer_token before running this test case'
     end
   end
 
@@ -109,13 +124,6 @@ RSpec.describe 'WebStore Client Test Cases - Checkout Session APIs' do
     releaseEnvironment: '',
     deliverySpecifications: ''
   }
-
-  it 'Validating Get Buyer API' do
-    headers = {}
-    headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
-    result = client.get_buyer(buyer_token: buyer_token, headers: headers)
-    expect(result[:buyerId]).to start_with('amzn1.account.')
-  end
 
   it 'Validating Create Checkout Session API' do
     headers = {}

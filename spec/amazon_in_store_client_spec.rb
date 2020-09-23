@@ -47,8 +47,8 @@ RSpec.describe 'InStore Client Test Cases' do
     headers = {}
     headers['x-amz-pay-idempotency-key'] = SecureRandom.uuid.to_s.gsub(/-/, '')
     result = client.merchant_scan(payload: merchant_scan_payload, headers: headers)
-    charge_permission_id = result[:chargePermissionId]
     result = result.transform_keys(&:to_sym)
+    charge_permission_id = result[:chargePermissionId]
     expect(result.keys).to eq(merchant_scan_expected_response.keys)
   end
 
@@ -65,8 +65,8 @@ RSpec.describe 'InStore Client Test Cases' do
       softDescriptor: 'amzn-store'
     }
     result = client.charge(payload: charge_payload)
-    charge_id = result[:chargeId]
     result = result.transform_keys(&:to_sym)
+    charge_id = result[:chargeId]
     expect(result.keys).to eq(charge_expected_response.keys)
   end
 
