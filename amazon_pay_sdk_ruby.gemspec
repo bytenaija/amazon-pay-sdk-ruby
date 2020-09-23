@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'amazon_pay/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'amazon_pay_ruby_sdk'
+  spec.name          = 'amazon_pay_sdk_ruby'
   spec.version       = AmazonPay::VERSION
   spec.authors       = ['Everistus Olumese']
   spec.email         = ['everistusolumese@gmail.com']
