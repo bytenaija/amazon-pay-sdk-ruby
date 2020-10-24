@@ -1,6 +1,7 @@
 # Amazon Pay API SDK (Ruby)
 
 [![Gem Version](https://badge.fury.io/rb/amazon_pay_sdk_ruby.svg)](https://badge.fury.io/rb/amazon_pay_sdk_ruby)
+[![Made in Nigeria](https://img.shields.io/badge/made%20in-nigeria-008751.svg?style=flat-square)](https://github.com/acekyd/made-in-nigeria)
 
 Amazon Pay Checkout v2 Integration
 
