@@ -59,7 +59,7 @@ To associate the key with your account, follow the instructions here to
 
 ```ruby
    config = {
-        'public_Key_id': 'ABC123DEF456XYZ', # RSA Public Key ID (this is not the Merchant or Seller ID)
+        'public_key_id': 'ABC123DEF456XYZ', # RSA Public Key ID (this is not the Merchant or Seller ID)
         'private_key': File.read(File.expand_path('tst/private.pem', __dir__)), # Path to RSA Private Key (or a string representation)
         'region': 'us',                                                         # Must be one of: 'us', 'eu', 'jp'
         'sandbox': true                                                         # true (Sandbox) or false (Production) boolean
